@@ -6,7 +6,14 @@ const GeneratingGroceryList = async (number, budget, diet, cuisine) => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `Create a detailed grocery list for a meal plan that can feed ${number} for biweekly. The total budget is $${budget}, and the list should follow a ${diet} diet. Please focus on ${cuisine} cuisine. Include items in categories like proteins, vegetables, fruits, grains, and spices. Ensure that each item fits within the dietary preferences and is affordable within the budget. Provide the grocery list in an array format with each item as an object containing the name, quantity needed, estimated cost, and category (e.g., protein, grain). Your response should only have an array and no text`;
+    const prompt = `Create a detailed grocery list for a meal plan that can feed ${number} for biweekly. The total budget is $${budget}, and the list should follow a ${diet} diet. Please focus on ${cuisine} cuisine. Include items in categories like proteins, vegetables, fruits, grains, and spices. Ensure that each item fits within the dietary preferences and is affordable within the budget. Provide the grocery list in an array format with each item as an object containing the name, quantity needed, estimated cost, and category (e.g., protein, grain). Your response should only have an array and no text, Example to follow for each object in the array: category
+    "Protein",
+    estimatedCost
+    "10.00",
+    name
+    "Chicken Breast",
+    quantity
+    "1.5 lbs" `;
 
     try {
         const result = await model.generateContent(prompt);
