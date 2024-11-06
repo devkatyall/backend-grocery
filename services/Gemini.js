@@ -17,7 +17,6 @@ const GeneratingGroceryList = async (number, budget, diet, cuisine) => {
         const jsonArrayMatch = responseText.match(/\[.*\]/s);
         if (jsonArrayMatch) {
             const groceryList = JSON.parse(jsonArrayMatch[0]);
-            console.log(groceryList);
             return groceryList 
         } else {
             console.error("Error: Could not find JSON array in response.");
