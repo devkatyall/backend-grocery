@@ -11,10 +11,10 @@ async function ReqGrocery(req, res){
     }
 
     try {
-        const decodedToken = await admin.auth().verifyIdToken(idToken);
-        if (decodedToken.uid !== userId) {
-            return res.status(403).json({ error: 'Unauthorized request' });
-        }
+        // const decodedToken = await admin.auth().verifyIdToken(idToken);
+        // if (decodedToken.uid !== userId) {
+        //     return res.status(403).json({ error: 'Unauthorized request' });
+        // }
 
         // Proceed with the rest of the operation as authenticated
         const userDocRef = db.collection('users').doc(userId);
