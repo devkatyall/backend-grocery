@@ -4,7 +4,7 @@ const admin = require("firebase-admin")
 
 async function ReqGrocery(req, res){
 
-    const { userId, idToken} = req.body;
+    const { userId, idToken, name} = req.body;
 
     if(!userId || !idToken){
         return res.status(403).json({error: 'Unauthorised Request. Please make sure you are including token and userId.'})
@@ -34,7 +34,8 @@ async function ReqGrocery(req, res){
             // Store grocery list back in Firebase (optional)
             const response = await userDocRef.collection('groceryLists').add({ 
                 list: groceryList, 
-                generatedAt: new Date() 
+                generatedAt: new Date(),
+                name: name
             });
             const recipes = await GenerateRecipeList(groceryList)
             if(recipes){
