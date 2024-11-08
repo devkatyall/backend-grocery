@@ -6,6 +6,15 @@ async function ReqGrocery(req, res){
 
     const { userId, idToken, name} = req.body;
 
+    let listName
+
+    if(!name){
+        listName = 'Your First List'
+    }
+    else{
+        listName = name
+    }
+
     if(!userId || !idToken){
         return res.status(403).json({error: 'Unauthorised Request. Please make sure you are including token and userId.'})
     }
@@ -35,7 +44,7 @@ async function ReqGrocery(req, res){
             const response = await userDocRef.collection('groceryLists').add({ 
                 list: groceryList, 
                 generatedAt: new Date(),
-                name: name
+                name: listName
             });
             const recipes = await GenerateRecipeList(groceryList)
             if(recipes){
